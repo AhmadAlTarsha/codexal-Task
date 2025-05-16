@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./layout.css";
 import React, { useEffect, useState } from "react";
+import Button from "../components/button/button";
 
 const Layout = () => {
   const [users, setUsers] = useState([]);
@@ -36,6 +37,7 @@ const Layout = () => {
           <p>
             <strong>Phone:</strong> {user.phone}
           </p>
+          <Button user={user} />
         </div>
       ))}
     </div>
