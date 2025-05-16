@@ -1,19 +1,23 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Layout from './layout/layout';
-import Loader from './components/loader/loader'; 
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+import Layout from "./layout/layout";
+import Loader from "./components/loader/loader";
+import ErrorModal from "./components/errorModal/errorModal";
 
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const getUsers = async () => {
+    setLoading(true);
+    setError(false);
     try {
       const response = await axios.get("https://jsonplaceholder.typicode.com/users");
       setUsers(response.data);
-    } catch (error) {
-      console.error("حدث خطأ أثناء جلب البيانات", error);
+    } catch (err) {
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -23,9 +27,15 @@ function App() {
     getUsers();
   }, []);
 
+  if (loading) return <Loader />;
+
   return (
     <>
-      {loading ? <Loader /> : <Layout users={users} />}
+      {error ? (
+        <ErrorModal message="server error" onRetry={getUsers} />
+      ) : (
+        <Layout users={users} />
+      )}
     </>
   );
 }
