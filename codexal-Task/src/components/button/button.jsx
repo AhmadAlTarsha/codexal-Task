@@ -12,7 +12,7 @@ const Button = ({ user }) => {
   return (
     <>
       <button className="details-button" onClick={handleOpen}>
-        المزيد من المعلومات
+      more info 
       </button>
       {showModal && <UserModal user={user} onClose={handleClose} />}
     </>
