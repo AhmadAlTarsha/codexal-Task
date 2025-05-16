@@ -1,14 +1,23 @@
 .details-button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #007bff;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #28a745; /* لون أخضر أنيق */
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     color: white;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
   .details-button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
+    transform: scale(1.03);
+  }
+  
+  .details-button:active {
+    background-color: #1e7e34;
+    transform: scale(0.98);
   }
