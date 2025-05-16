@@ -1,48 +1,45 @@
-import axios from 'axios';
-import React, { useEffect } from 'react'
-
-
-
-
-
-
-
+import axios from "axios";
+import "./layout.css";
+import React, { useEffect, useState } from "react";
 
 const Layout = () => {
+  const [users, setUsers] = useState([]);
 
+  const getUsers = async () => {
+    try {
+      const users = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+      );
 
+      if (users.data?.length > 0) {
+        setUsers(users?.data);
 
-    const getUsers= async () => {
-    
-        try {
-          const res = await axios.get("https://jsonplaceholder.typicode.com/users")
-    
-          if (res.data?.length > 0) {
-            // setPosts(res?.data);
-            // getPostComments();
-            // setLoader(false)
+        console.log(users.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-            console.log(res.data);
-            
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-
-
-
-
-
-useEffect(() => {
-    getUsers()
+  useEffect(() => {
+    getUsers();
   }, []);
 
-
   return (
-    <div>Layout</div>
-  )
-}
+    <div className="user-list">
+      {users.map((user) => (
+        <div key={user.id} className="user-card">
+          <h2>{user.name}</h2>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Phone:</strong> {user.phone}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;
